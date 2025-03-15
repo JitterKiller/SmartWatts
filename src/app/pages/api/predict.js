@@ -3,7 +3,8 @@ import path from "path";
 
 export async function POST(req) {
   try {
-    const { num_rooms, num_people, housearea, is_ac, is_tv } = await req.json();
+    const { num_rooms, num_people, housearea, is_ac, is_tv, is_flat, num_children, is_urban } = await req.json();
+
 
     const scriptPath = path.join(process.cwd(), "model/predict.py");
 
@@ -14,6 +15,10 @@ export async function POST(req) {
       housearea,
       is_ac,
       is_tv,
+      is_flat,
+      num_children,
+      is_urban
+      
     ]);
 
     return new Promise((resolve) => {
