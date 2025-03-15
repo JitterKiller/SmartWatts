@@ -16,8 +16,8 @@ export function UserInfo() {
   const [isOpen, setIsOpen] = useState(false);
 
   const USER = {
-    name: "John Smith",
-    email: "johnson@nextadmin.com",
+    name: "Adam Ait Bousselham",
+    email: "adam.aitbousselham@epfl.ch",
     img: "/images/user/user-03.png",
   };
 

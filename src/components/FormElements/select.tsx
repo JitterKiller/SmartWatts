@@ -9,6 +9,7 @@ type PropsType = {
   items: { value: string; label: string }[];
   prefixIcon?: React.ReactNode;
   className?: string;
+  required?: boolean;
 } & (
   | { placeholder?: string; defaultValue: string }
   | { placeholder: string; defaultValue?: string }
@@ -21,6 +22,7 @@ export function Select({
   placeholder,
   prefixIcon,
   className,
+  required,
 }: PropsType) {
   const id = useId();
 
@@ -33,6 +35,7 @@ export function Select({
         className="block text-body-sm font-medium text-dark dark:text-white"
       >
         {label}
+        {required && <span className="ml-1 select-none text-red">*</span>} {/* Ajoutez cette ligne */}
       </label>
 
       <div className="relative">
@@ -51,6 +54,7 @@ export function Select({
             isOptionSelected && "text-dark dark:text-white",
             prefixIcon && "pl-11.5",
           )}
+          required={required}
         >
           {placeholder && (
             <option value="" disabled hidden>
