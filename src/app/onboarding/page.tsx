@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState , useCallback} from "react";
 import OnboardingForm from "@/components/Onboarding/OnboardingForm";
 import UploadSection from "@/components/Onboarding/UploadSection";
 import { Button } from "@/components/ui-elements/button";
@@ -30,9 +30,9 @@ const OnboardingPage: React.FC = () => {
   });
   const [file, setFile] = useState<File | null>(null);
 
-  const handleFormChange = (data: FormData) => {
-    setFormData(data);
-  };
+  const handleFormChange = useCallback((data: FormData) => {
+    setFormData((prev) => ({ ...prev, ...data })); // ✅ Only update changed fields
+  }, []);
 
   const handleFileChange = (selectedFile: File | null) => {
     setFile(selectedFile);
@@ -43,39 +43,28 @@ const OnboardingPage: React.FC = () => {
       alert("Please upload a file.");
       return;
     }
-
-    // Vérifiez que tous les champs du formulaire sont remplis
-    const { houseArea, numberOfPersons, squareFeet } = formData;
-    if (!houseArea || !numberOfPersons || !squareFeet) {
-      alert("Please fill in all the fields.");
-      return;
-    }
-
-    setIsModalOpen(true);
-
-    // Envoyer les données à un modèle Python
+  
     const formDataWithFile = new FormData();
     formDataWithFile.append('file', file);
-    formDataWithFile.append('houseArea', formData.houseArea.toString());
-    formDataWithFile.append('numberOfPersons', formData.numberOfPersons.toString());
-    formDataWithFile.append('squareFeet', formData.squareFeet.toString());
-    formDataWithFile.append('isACOn', formData.isACOn.toString());
-    formDataWithFile.append('isTVOn', formData.isTVOn.toString());
-    formDataWithFile.append('isUrban', formData.isUrban.toString());
-    formDataWithFile.append('isFlat', formData.isFlat.toString());
-
-    fetch('http://localhost:5000/api', {
+  
+    fetch('http://localhost:5001/api/upload', {
       method: 'POST',
       body: formDataWithFile,
+      headers: {
+        'Accept': 'application/json',
+      },
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        alert(`File uploaded: ${data.fileUrl}`);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
+  
+  
 
   return (
     <div>

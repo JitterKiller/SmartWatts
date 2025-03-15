@@ -28,9 +28,10 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
     isFlat,
   };
 
+  // ✅ Prevent unnecessary updates (deep comparison)
   useEffect(() => {
     onChange(formData);
-  }, [houseArea, numberOfPersons, squareFeet, isACOn, isTVOn, isUrban, isFlat, onChange]);
+  }, [JSON.stringify(formData), onChange]); // ✅ Using JSON.stringify to compare deeply
 
   return (
     <ShowcaseSection title="Input Fields" className="space-y-5.5 !p-6.5">
@@ -42,7 +43,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
           { label: "Switzerland", value: "CH" },
           { label: "Canada", value: "Canada" },
         ]}
-        defaultValue="USA"
+        defaultValue=''
         prefixIcon={<GlobeIcon />}
         required
       />
