@@ -99,7 +99,7 @@ return (
               type="text"
               value={userLocation}
               onChange={(e) => setUserLocation(e.target.value)}
-              placeholder="Your location (e.g., fr)"
+              placeholder="Your country"
               className="w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-blue-400"
             />
           </div>

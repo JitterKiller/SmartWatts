@@ -101,7 +101,7 @@ const OnboardingPage: React.FC = () => {
       // If the model response is a JSON string, you can parse it:
       const parsedResponse = JSON.parse(chatData.response);
       console.log("Parsed model answer:", parsedResponse);
-      
+      router.push("http://localhost:3000");
   
     } catch (error) {
       console.error("Error:", error);
