@@ -50,7 +50,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
         required
       />
       <InputGroup
-        label="House Area Size"
+        label="House Area Size (m²)"
         placeholder="Enter house area size"
         type="number"
         value={houseArea.toString()}
@@ -58,7 +58,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
         required
       />
       <InputGroup
-        label="Number of Persons"
+        label="Number of Persons living inside the house"
         placeholder="Enter number of persons"
         type="number"
         value={numberOfPersons.toString()}
@@ -92,12 +92,12 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
         onChange={(e) => setIsTVOn(e.target.checked)}
       />
       <CheckboxGroup
-        label="Is your house urban?"
+        label="Is your house located inside a city?"
         checked={isUrban}
         onChange={(e) => setIsUrban(e.target.checked)}
       />
       <CheckboxGroup
-        label="Is your house flat?"
+        label="Do you live in a flat?"
         checked={isFlat}
         onChange={(e) => setIsFlat(e.target.checked)}
       />
