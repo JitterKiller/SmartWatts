@@ -35,7 +35,7 @@ class EnergyAdvisorBackend:
             user_location = data.get("user_location", "")
 
             if not appliance_list or not user_location:
-                return jsonify({"error": "Missing required fields"}), 400
+                return jsonify({"error": "Please indicate your country of residence"}), 400
 
             # Build the prompt text.
             prompt_text = f"""Human:
