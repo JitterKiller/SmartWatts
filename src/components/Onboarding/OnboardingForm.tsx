@@ -12,7 +12,8 @@ interface OnboardingFormProps {
 const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
   const [houseArea, setHouseArea] = useState<number | string>('');
   const [numberOfPersons, setNumberOfPersons] = useState<number | string>('');
-  const [squareFeet, setSquareFeet] = useState<number | string>('');
+  const [numberOfRooms, setNumberOfRooms] = useState<number | string>('');
+  const [numberOfChildren, setNumberOfChildren] = useState<number | string>('');
   const [isACOn, setIsACOn] = useState(false);
   const [isTVOn, setIsTVOn] = useState(false);
   const [isUrban, setIsUrban] = useState(false);
@@ -21,10 +22,11 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
   const formData = {
     houseArea: Number(houseArea),
     numberOfPersons: Number(numberOfPersons),
-    squareFeet: Number(squareFeet),
+    numberOfRooms: Number(numberOfRooms),
     isACOn,
     isTVOn,
     isUrban,
+    numberOfChildren: Number(numberOfChildren),
     isFlat,
   };
 
@@ -64,13 +66,21 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
         required
       />
       <InputGroup
-        label="Square Feet"
+        label="Number of Rooms"
         placeholder="Enter square feet"
         type="number"
-        value={squareFeet.toString()}
-        handleChange={(e) => setSquareFeet(e.target.value)}
+        value={numberOfRooms.toString()}
+        handleChange={(e) => setNumberOfRooms(e.target.value)}
         required
       />
+        <InputGroup
+            label="Number of Children"
+            placeholder="Enter number of children"
+            type="number"
+            value={numberOfChildren.toString()}
+            handleChange={(e) => setNumberOfChildren(e.target.value)}
+            required
+        />
       <CheckboxGroup
         label="Is AC On"
         checked={isACOn}

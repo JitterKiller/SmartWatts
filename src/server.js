@@ -2,12 +2,13 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const cors = require('cors'); // ✅ Import CORS
+const { execFile } = require('child_process');
+const cors = require('cors');
 
 const app = express();
 const port = 5001;
 
-// ✅ Enable CORS for all requests
+// Enable CORS for all requests from frontend
 app.use(cors({
   origin: 'http://localhost:3000', // Allow requests from Next.js frontend
   methods: 'GET,POST',
@@ -16,13 +17,13 @@ app.use(cors({
 
 app.use(express.json());
 
-// ✅ Ensure the `uploads/` directory exists
+// Ensure the `uploads/` directory exists
 const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// ✅ Configure Multer for file storage
+// Configure Multer for file storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, uploadDir);
@@ -34,20 +35,36 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// ✅ Serve static files (uploaded files will be accessible via URL)
-app.use('/uploads', express.static(uploadDir));
+app.post('/api', upload.single('file'), (req, res) => {
+  const formData = req.body;
+  const file = req.file;
 
-// ✅ API route for file upload
-app.post('/api/upload', upload.single('file'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
+  // ✅ Prepare input data for the model
+  const inputData = [
+    Number(formData.numberOfRooms),
+    Number(formData.numberOfPersons),
+    Number(formData.houseArea),
+    formData.isACOn === 'true' ? 1 : 0,
+    formData.isTVOn === 'true' ? 1 : 0,
+    formData.isFlat === 'true' ? 1 : 0,
+    formData.isUrban === 'true' ? 1 : 0,
+    Number(formData.numberOfChildren),
+  ];
 
-  const fileUrl = `http://localhost:${port}/uploads/${req.file.filename}`;
-  res.json({ message: 'File uploaded successfully', fileUrl });
+  console.log("Running prediction with input:", inputData);
+
+  // ✅ Call Python script with input data
+  execFile('python3', ['./model/prediction.py', ...inputData.map(String)], (error, stdout, stderr) => {
+    if (error) {
+      console.error("Execution error:", error);
+      return res.status(500).json({ message: 'Error executing Python script', error: stderr });
+    }
+
+    console.log("Python output:", stdout);
+    res.json({ message: 'Success', prediction: stdout.trim() });
+  });
 });
 
-// ✅ Start the Express server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`✅ Server is running on http://localhost:${port}`);
 });

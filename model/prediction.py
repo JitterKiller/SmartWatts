@@ -1,13 +1,19 @@
+import sys
 import joblib
-import numpy as np  # If input is in array form
+import numpy as np
 
-# Load trained model
+# ✅ Load the trained model
 model = joblib.load("./model/energy_model.pkl")
 
-# Example input data (replace with real values)
-input_data = np.array([[2, 5, 631.54, 0, 1, 0, 0, 0]])  # [num_rooms, num_people, housearea, is_ac, is_tv]
+# ✅ Read input from command line arguments
+try:
+    input_data = np.array([list(map(float, sys.argv[1:]))])  # Convert args to float
+except Exception as e:
+    print(f"Error processing input: {e}")
+    sys.exit(1)
 
-# Make prediction
+# ✅ Make prediction
 prediction = model.predict(input_data)
 
-print("Predicted consumption:", prediction[0])
+# ✅ Print the result (so Node.js can capture it)
+print(prediction[0])
