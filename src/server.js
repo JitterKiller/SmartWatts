@@ -6,7 +6,7 @@ const { execFile } = require('child_process');
 const cors = require('cors');
 
 const app = express();
-const port = 5001;
+const port = 5002;
 
 // Enable CORS for all requests from frontend
 app.use(cors({

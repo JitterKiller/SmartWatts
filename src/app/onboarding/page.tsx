@@ -64,40 +64,37 @@ const OnboardingPage: React.FC = () => {
       alert("Please upload a file.");
       return;
     }
-
-    setLoading(true); // ✅ Start loading
-
-    await new Promise((resolve) => setTimeout(resolve, 10)); // ✅ Ensure state update is reflected
-
-    const formDataWithFile = new FormData();
-    formDataWithFile.append("file", file);
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataWithFile.append(key, value.toString());
-    });
-
-    fetch("http://localhost:5001/api", {
+  
+    setLoading(true);
+  
+    try {
+      // ✅ 1. Upload PDF
+      const formData = new FormData();
+      formData.append("file", file);
+  
+      const uploadResponse = await fetch("http://localhost:5003/api/upload", {
         method: "POST",
-        body: formDataWithFile,
-        headers: {
-          "Accept": "application/json",  // ✅ Ensure JSON response
-        },
-      })
-        .then(async (response) => {
-          if (!response.ok) {
-            throw new Error(`Server error: ${response.status} - ${response.statusText}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log("Success:", data);
-          router.push("http://localhost:3000");
-        })
-        .catch((error) => {
-          console.error("Error fetching API:", error);
-        }).finally(() => {
-            setLoading(false); // ✅ Stop loading
-        });
-      
+        body: formData,
+      });
+  
+      if (!uploadResponse.ok) {
+        throw new Error("Upload failed: " + await uploadResponse.text());
+      }
+  
+      const { filename } = await uploadResponse.json();
+  
+      // ✅ 2. Stocker le filename dans le state global/localStorage
+      localStorage.setItem("currentInvoice", filename);
+  
+      // ✅ 3. Redirection vers le chatbot
+      router.push("/chat"); 
+  
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Erreur lors du traitement du PDF");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
