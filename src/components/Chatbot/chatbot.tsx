@@ -10,7 +10,7 @@ type Message = {
 export default function ChatPage() {
   const [inputMessage, setInputMessage] = useState("");
   const [conversation, setConversation] = useState<Message[]>([
-    { content: "Hello! How can I help you with your energy consumption today?", isUser: false }
+    { content: "Hello ! How can I help you with your energy consumption today?", isUser: false }
   ]);
   
   const [loading, setLoading] = useState(false);

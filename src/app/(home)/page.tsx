@@ -10,17 +10,17 @@ const Dashboard: React.FC = () => {
     {/* Top Section with Three Cards */}
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <OverviewCard
-        label="Current Month Usage"
+        label="Current Monthly Usage"
         data={{ value: "350 kWh", growthRate: 5 }}
         Icon={EnergyIcon}
       />
       <OverviewCard
-        label="Estimated Cost"
+        label="Estimated Monthly Cost"
         data={{ value: "$124.50", growthRate: 3 }}
         Icon={DollarIcon}
       />
       <OverviewCard
-        label="Similar Households"
+        label="Comparison with Similar Households"
         data={{ value: "-12%", growthRate: -12 }}
         Icon={HomeIcon}
       />
