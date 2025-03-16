@@ -1,5 +1,5 @@
-import darkLogo from "@/assets/logos/dark.svg";
-import logo from "@/assets/logos/main.svg";
+import darkLogo from "@/assets/logos/awsdark.png";
+import logo from "@/assets/logos/aws.png";
 import Image from "next/image";
 
 export function Logo() {
