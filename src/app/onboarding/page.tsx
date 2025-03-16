@@ -87,7 +87,21 @@ const OnboardingPage: React.FC = () => {
       localStorage.setItem("currentInvoice", filename);
   
       // ✅ 3. Redirection vers le chatbot
-      router.push("/chat"); 
+      const chatResponse = await fetch("http://localhost:5003/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          filename: localStorage.getItem("currentInvoice"),
+          message: "Your user message here"
+        })
+      });
+      const chatData = await chatResponse.json();
+      console.log("Raw response from Bedrock:", chatData);
+      
+      // If the model response is a JSON string, you can parse it:
+      const parsedResponse = JSON.parse(chatData.response);
+      console.log("Parsed model answer:", parsedResponse);
+      
   
     } catch (error) {
       console.error("Error:", error);
