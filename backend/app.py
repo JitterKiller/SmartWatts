@@ -79,15 +79,22 @@ def handle_upload():
         conn.commit()
 
         # Build prompt for Bedrock matching energy advisor parameters
-        prompt_text = f"""Invoice Text:
+        prompt_text = f"""Extract exactly two numbers from the following invoice: 
+
+Invoice Text:
 {invoice_text}
 
 Additional Data:
 {json.dumps(form_data, indent=2)}
 
-Task: Prepare a contextual summary to assist with analysis.
+Task:
+1. Extract the **total price** in dollars.
+2. Extract the **total kilowatt-hour (kWh) usage**.
 
-Assistant:"""
+Return ONLY these two numbers in this exact order, **separated by a single space**. No additional text, explanations, or formatting.
+
+Assistant:
+"""
 
         request_body = build_request_body(prompt_text)
 
