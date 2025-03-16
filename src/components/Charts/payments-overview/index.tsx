@@ -1,7 +1,7 @@
 import { PeriodPicker } from "@/components/period-picker";
 import { standardFormat } from "@/lib/format-number";
 import { cn } from "@/lib/utils";
-import { getPaymentsOverviewData } from "@/services/charts.services";
+import { getEnergyOverviewData } from "@/services/charts.services";
 import { PaymentsOverviewChart } from "./chart";
 
 type PropsType = {
@@ -13,7 +13,7 @@ export async function PaymentsOverview({
   timeFrame = "monthly",
   className,
 }: PropsType) {
-  const data = await getPaymentsOverviewData(timeFrame);
+  const data = await getEnergyOverviewData(timeFrame);
 
   return (
     <div
@@ -35,16 +35,16 @@ export async function PaymentsOverview({
       <dl className="grid divide-stroke text-center dark:divide-dark-3 sm:grid-cols-2 sm:divide-x [&>div]:flex [&>div]:flex-col-reverse [&>div]:gap-1">
         <div className="dark:border-dark-3 max-sm:mb-3 max-sm:border-b max-sm:pb-3">
           <dt className="text-xl font-bold text-dark dark:text-white">
-            ${standardFormat(data.received.reduce((acc, { y }) => acc + y, 0))}
+            {standardFormat(data.yourConsumption.reduce((acc, { y }) => acc + y, 0))} kWH
           </dt>
-          <dd className="font-medium dark:text-dark-6">Received Amount</dd>
+          <dd className="font-medium dark:text-dark-6">Your Consumption</dd>
         </div>
 
         <div>
           <dt className="text-xl font-bold text-dark dark:text-white">
-            ${standardFormat(data.due.reduce((acc, { y }) => acc + y, 0))}
+            {standardFormat(data.similarHouseholds.reduce((acc, { y }) => acc + y, 0))} kWH
           </dt>
-          <dd className="font-medium dark:text-dark-6">Due Amount</dd>
+          <dd className="font-medium dark:text-dark-6">Similar Households</dd>
         </div>
       </dl>
     </div>

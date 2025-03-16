@@ -37,59 +37,59 @@ export async function getDevicesUsedData(
   return data;
 }
 
-export async function getPaymentsOverviewData(
-  timeFrame?: "monthly" | "yearly" | (string & {}),
+export async function getEnergyOverviewData(
+  timeFrame?: "monthly" | "yearly" | (string & {})
 ) {
-  // Fake delay
+  // Simulated API delay
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   if (timeFrame === "yearly") {
     return {
-      received: [
-        { x: 2020, y: 450 },
-        { x: 2021, y: 620 },
-        { x: 2022, y: 780 },
-        { x: 2023, y: 920 },
-        { x: 2024, y: 1080 },
+      yourConsumption: [
+        { x: 2020, y: 4200 }, // Your actual yearly consumption in kWh
+        { x: 2021, y: 4300 },
+        { x: 2022, y: 4600 },
+        { x: 2023, y: 5000 },
+        { x: 2024, y: 5200 },
       ],
-      due: [
-        { x: 2020, y: 1480 },
-        { x: 2021, y: 1720 },
-        { x: 2022, y: 1950 },
-        { x: 2023, y: 2300 },
-        { x: 2024, y: 1200 },
+      similarHouseholds: [
+        { x: 2020, y: 3800 }, // More fluctuation compared to yours
+        { x: 2021, y: 3900 },
+        { x: 2022, y: 4100 },
+        { x: 2023, y: 4250 },
+        { x: 2024, y: 4400 },
       ],
     };
   }
 
   return {
-    received: [
-      { x: "Jan", y: 0 },
-      { x: "Feb", y: 20 },
-      { x: "Mar", y: 35 },
-      { x: "Apr", y: 45 },
-      { x: "May", y: 35 },
-      { x: "Jun", y: 55 },
-      { x: "Jul", y: 65 },
-      { x: "Aug", y: 50 },
-      { x: "Sep", y: 65 },
-      { x: "Oct", y: 75 },
-      { x: "Nov", y: 60 },
-      { x: "Dec", y: 75 },
+    yourConsumption: [
+      { x: "Jan", y: 340 }, // Higher in winter due to heating
+      { x: "Feb", y: 280 },
+      { x: "Mar", y: 310 },
+      { x: "Apr", y: 270 },
+      { x: "May", y: 230 },
+      { x: "Jun", y: 250 },
+      { x: "Jul", y: 410 }, // AC spikes in summer
+      { x: "Aug", y: 390 },
+      { x: "Sep", y: 320 },
+      { x: "Oct", y: 260 },
+      { x: "Nov", y: 330 },
+      { x: "Dec", y: 370 },
     ],
-    due: [
-      { x: "Jan", y: 15 },
-      { x: "Feb", y: 9 },
-      { x: "Mar", y: 17 },
-      { x: "Apr", y: 32 },
-      { x: "May", y: 25 },
-      { x: "Jun", y: 68 },
-      { x: "Jul", y: 80 },
-      { x: "Aug", y: 68 },
-      { x: "Sep", y: 84 },
-      { x: "Oct", y: 94 },
-      { x: "Nov", y: 74 },
-      { x: "Dec", y: 62 },
+    similarHouseholds: [
+      { x: "Jan", y: 280 }, // More varied values
+      { x: "Feb", y: 290 },
+      { x: "Mar", y: 250 },
+      { x: "Apr", y: 220 },
+      { x: "May", y: 200 },
+      { x: "Jun", y: 270 },
+      { x: "Jul", y: 380 },
+      { x: "Aug", y: 310 },
+      { x: "Sep", y: 270 },
+      { x: "Oct", y: 290 },
+      { x: "Nov", y: 310 },
+      { x: "Dec", y: 350 },
     ],
   };
 }

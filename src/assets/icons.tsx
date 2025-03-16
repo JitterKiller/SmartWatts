@@ -416,3 +416,46 @@ export function UploadIcon(props: IconProps) {
     </svg>
   );
 }
+
+
+export function EnergyIcon(props: IconProps) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      {...props}
+    >
+      <path d="M10 0L3 11H9L6 20L17 8H11L14 0H10Z" />
+    </svg>
+  );
+}
+
+export function DollarIcon(props: IconProps) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      {...props}
+    >
+      <path d="M10 1V19M6 5H14C16 5 17 7 17 9C17 11 16 13 14 13H6C4 13 3 11 3 9C3 7 4 5 6 5Z" />
+    </svg>
+  );
+}
+
+export function HomeIcon(props: IconProps) {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      {...props}
+    >
+      <path d="M10 2L2 8V18H8V12H12V18H18V8L10 2Z" />
+    </svg>
+  );
+}

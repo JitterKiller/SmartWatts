@@ -6,8 +6,8 @@ import dynamic from "next/dynamic";
 
 type PropsType = {
   data: {
-    received: { x: unknown; y: number }[];
-    due: { x: unknown; y: number }[];
+    yourConsumption: { x: number | string; y: number }[];
+    similarHouseholds: { x: number | string; y: number }[];
   };
 };
 
@@ -91,12 +91,12 @@ export function PaymentsOverviewChart({ data }: PropsType) {
         options={options}
         series={[
           {
-            name: "Received",
-            data: data.received,
+            name: "Your Consumption",
+            data: data.yourConsumption,
           },
           {
-            name: "Due",
-            data: data.due,
+            name: "Similar Households",
+            data: data.similarHouseholds,
           },
         ]}
         type="area"

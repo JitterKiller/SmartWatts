@@ -116,7 +116,7 @@ Rules:
 
     def run(self):
         # Run on port 5000 to avoid conflict with Next.js (typically on 3000)
-        self.app.run(host="0.0.0.0", port=5001, debug=True)
+        self.app.run(host="0.0.0.0", port=5002, debug=True)
 
 if __name__ == "__main__":
     backend = EnergyAdvisorBackend()
