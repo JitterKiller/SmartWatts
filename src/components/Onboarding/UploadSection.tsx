@@ -16,7 +16,7 @@ const UploadSection: React.FC<UploadSectionProps> = ({ onFileChange }) => {
   };
 
   return (
-    <ShowcaseSection title="File upload" className="space-y-5 !py-6">
+    <ShowcaseSection title="Upload Your First Monthly Bill" className="space-y-5 !py-6">
       <InputGroup
         type="file"
         fileStyleVariant="style1"

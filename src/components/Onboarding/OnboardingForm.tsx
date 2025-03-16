@@ -36,7 +36,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
   }, [JSON.stringify(formData), onChange]); // ✅ Using JSON.stringify to compare deeply
 
   return (
-    <ShowcaseSection title="Input Fields" className="space-y-5.5 !p-6.5">
+    <ShowcaseSection title="Set Up Your Energy Profile" className="space-y-5.5 !p-6.5">
       <Select
         label="Select your Region"
         items={[
@@ -82,12 +82,12 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onChange }) => {
             required
         />
       <CheckboxGroup
-        label="Is AC On"
+        label="Do you have AC?"
         checked={isACOn}
         onChange={(e) => setIsACOn(e.target.checked)}
       />
       <CheckboxGroup
-        label="Is TV On"
+        label="Do you have TV?"
         checked={isTVOn}
         onChange={(e) => setIsTVOn(e.target.checked)}
       />
