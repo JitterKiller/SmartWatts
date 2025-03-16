@@ -14,13 +14,13 @@ export const NAV_DATA = [
       {
         title: "My Appliances",
         url: "/appliances",
-        icon: Icons.InvoiceIcon,
+        icon: Icons.ApplianceIcon,
         items: [],
       },
       {
         title: "Upload Bills",
         url: "/onboarding",
-        icon: Icons.InvoiceIcon,
+        icon: Icons.InvoiceIcon ,
         items: [],
       },
     ],
