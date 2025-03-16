@@ -18,9 +18,9 @@ export const NAV_DATA = [
         items: [],
       },
       {
-        title: "Onboarding",
+        title: "Upload Bills",
         url: "/onboarding",
-        icon: Icons.OnboardingIcon,
+        icon: Icons.InvoiceIcon,
         items: [],
       },
     ],

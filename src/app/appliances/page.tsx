@@ -204,7 +204,7 @@ const Page = () => {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h3 className="text-gray-500 text-sm">Estimated Monthly Cost</h3>
             <p className="text-3xl font-bold text-gray-900">
-              ${appliances.reduce((total, appliance) => total + calculateEnergyConsumption(appliance) * 0.15, 0).toFixed(2)}
+              {appliances.reduce((total, appliance) => total + calculateEnergyConsumption(appliance) * 0.15, 0).toFixed(2)} CHF
             </p>
           </div>
         </div>

@@ -11,12 +11,12 @@ const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <OverviewCard
           label="Current Monthly Usage"
-          data={{ value: "350 kWh", growthRate: 5 }}
+          data={{ value: "196.80 kWh", growthRate: 5 }}
           Icon={EnergyIcon}
         />
         <OverviewCard
           label="Estimated Monthly Cost"
-          data={{ value: "$124.50", growthRate: 3 }}
+          data={{ value: "29.52 CHF", growthRate: 3 }}
           Icon={DollarIcon}
         />
         <OverviewCard
@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
       {/* Bottom Section with Chart and Chat */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Chart Section */}
-        <div className="p-4 border rounded-lg shadow bg-white max-h-[550px] flex flex-col">
+        <div className="p-4 border rounded-lg shadow bg-white max-h-[550px] flex flex-col overflow-y-auto">
           <h2 className="text-lg font-semibold mb-4">Energy Consumption Trend</h2>
           <div className="flex-grow">
             <PaymentsOverview 
@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Chat Section */}
-        <div className="max-h-[550px] flex flex-col">
+        <div className="max-h-[550px] flex flex-col overflow-y-auto">
           <Chatbot />
         </div>
       </div>
